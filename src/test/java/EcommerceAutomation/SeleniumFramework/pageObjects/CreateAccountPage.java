@@ -6,12 +6,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-public class CreateAccount{
+import EcommerceAutomation.SeleniumFramework.AbstractComponents.AbstractComponent;
+
+public class CreateAccountPage extends AbstractComponent{
 	
 	WebDriver driver;
-	
-	@FindBy(linkText = "Register here")
-	WebElement registerLink;
 	
 	@FindBy(id="firstName")
 	WebElement fistNameInput;
@@ -43,30 +42,24 @@ public class CreateAccount{
 	@FindBy(id="login")
 	WebElement registerBtn;
 	
-	@FindBy(xpath="//button[text()='Login']")
-	WebElement loginBtn;
-
-	public CreateAccount(WebDriver driver) {
+	public CreateAccountPage(WebDriver driver) {
+		super(driver);
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
 	
-	public void createAccountTest() {
-		registerLink.click();
-		fistNameInput.sendKeys("santiago");
-		lastNameInput.sendKeys("castanon");
-		emailInput.sendKeys("santiagocastanonarvizu@gmail.com");
-		phoneNumberInput.sendKeys("4426244708");
+	public void createNewAccount(String firstName, String lastName, String email, String phoneNumber, String occupationValue, String password) {
+		fistNameInput.sendKeys(firstName);
+		lastNameInput.sendKeys(lastName);
+		emailInput.sendKeys(email);
+		phoneNumberInput.sendKeys(phoneNumber);
 		Select occupationSelect = new Select(occupation);
-		occupationSelect.selectByVisibleText("Engineer");
+		occupationSelect.selectByVisibleText(occupationValue);
 		genderRadioBtn.click();
-		String password = "sAn123@0";
 		passwordInput.sendKeys(password);
 		confirmPasswordInput.sendKeys(password);
 		eighteenYearOldCheckbox.click();
 		registerBtn.click();
-		//go to login
-		loginBtn.click();
 	}
 
 }

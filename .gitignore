@@ -18,6 +18,7 @@ maven-testng-plugin-1.2.jar
 nb-configuration.xml
 out
 src/generated
+src/main/resources
 target
 test-output
 test-output-tests

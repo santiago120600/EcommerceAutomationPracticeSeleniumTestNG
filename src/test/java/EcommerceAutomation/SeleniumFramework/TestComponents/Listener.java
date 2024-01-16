@@ -1,4 +1,4 @@
-package EcommerceAutomation.SeleniumFramework;
+package EcommerceAutomation.SeleniumFramework.TestComponents;
 
 import org.testng.ITestListener;
 import org.testng.ITestResult;

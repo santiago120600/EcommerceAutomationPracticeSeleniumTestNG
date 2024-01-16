@@ -11,7 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 import EcommerceAutomation.SeleniumFramework.AbstractComponents.AbstractComponent;
 
 
-public class ShopLanding extends AbstractComponent{
+public class ShopLandingPage extends AbstractComponent{
 	WebDriver driver;
 	
 	@FindBy(css = "#toast-container")
@@ -23,18 +23,14 @@ public class ShopLanding extends AbstractComponent{
 	@FindBy(css = ".card")
 	List<WebElement> products;
 	
-	@FindBy(xpath = "//button[@routerlink='/dashboard/cart']")
-	WebElement cartBtn;
-	
 	By productsBy = By.cssSelector(".mb-3");
 	
-	public ShopLanding(WebDriver driver) {
+	public ShopLandingPage(WebDriver driver) {
 		super(driver);
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
 	
-	//add product by name -- use dataprovider
 	public void addProductToCart(String productName){
 		WebElement product = getProductByName(productName);
 		WebElement btn = product.findElement(By.xpath(".//button[contains(text(),'Add To Cart')]"));

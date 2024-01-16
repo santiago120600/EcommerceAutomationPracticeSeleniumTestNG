@@ -5,7 +5,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage{
+import EcommerceAutomation.SeleniumFramework.AbstractComponents.AbstractComponent;
+
+public class LoginPage extends AbstractComponent{
 	
 	WebDriver driver;
 	
@@ -18,16 +20,23 @@ public class LoginPage{
 	@FindBy(id="login")
 	WebElement loginBtn;
 	
+	@FindBy(linkText = "Register here")
+	WebElement registerLink;
+	
 	public LoginPage(WebDriver driver) {
+		super(driver);
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
 
-	public void doLogin() {
-		emailInput.sendKeys("santiagocastanonarvizu@gmail.com");
-		String password = "sAn123@0";
+	public void doLogin(String email, String password) {
+		emailInput.sendKeys(email);
 		passwordInput.sendKeys(password);
 		loginBtn.click();
+	}
+	
+	public void clickRegisterLink() {
+		registerLink.click();
 	}
 
 }
