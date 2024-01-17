@@ -42,6 +42,9 @@ public class CreateAccountPage extends AbstractComponent{
 	@FindBy(id="login")
 	WebElement registerBtn;
 	
+	@FindBy(id = "toast-container")
+	WebElement toastMsg;
+	
 	public CreateAccountPage(WebDriver driver) {
 		super(driver);
 		this.driver = driver;
@@ -60,6 +63,10 @@ public class CreateAccountPage extends AbstractComponent{
 		confirmPasswordInput.sendKeys(password);
 		eighteenYearOldCheckbox.click();
 		registerBtn.click();
+	}
+	
+	public String getToastMsg() {
+		return toastMsg.getText();
 	}
 
 }

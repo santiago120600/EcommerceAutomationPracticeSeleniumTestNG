@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+	<listeners>
+		<listener class-name="EcommerceAutomation.SeleniumFramework.TestComponents.Listener" />
+	</listeners>
+	<test name="Submit Order">
+		<parameter name="email" value="santiagocastanonarvizu@gmail.com" />
+		<parameter name="password" value="sAn123@0" />
+		<parameter name="productName" value="ADIDAS ORIGINAL" />
+		<classes>
+			<class name="EcommerceAutomation.SeleniumFramework.Tests.SubmitOrder"/>
+		</classes>
+	</test>
+</suite>
