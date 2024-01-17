@@ -19,6 +19,7 @@ nb-configuration.xml
 out
 src/generated
 src/main/resources
+reports/
 target
 test-output
 test-output-tests

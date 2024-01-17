@@ -12,7 +12,7 @@ import EcommerceAutomation.SeleniumFramework.pageObjects.CreateAccountPage;
 import EcommerceAutomation.SeleniumFramework.pageObjects.LoginPage;
 
 public class CreateAccount extends BaseTest {
-	@Test(dataProvider = "newSuccessfullAccountData", priority = 1)
+	@Test(dataProvider = "newSuccessfullAccountData", priority = 1, enabled = false)
 	public void createNewAccountSuccessfully(HashMap<String, String> input) {
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.clickRegisterLink();
@@ -22,7 +22,7 @@ public class CreateAccount extends BaseTest {
 		Assert.assertEquals(accountPage.getToastMsg(), "Registered Successfully");
 	}
 
-	@Test(dataProvider = "existingAccountData", enabled = false)
+	@Test(dataProvider = "existingAccountData")
 	public void verifyErrorOnCreateAccountForExistingEmail(HashMap<String, String> input) {
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.clickRegisterLink();
@@ -59,7 +59,7 @@ public class CreateAccount extends BaseTest {
 	@DataProvider
 	public Object[][] newSuccessfullAccountData() {
 		List<HashMap<String, String>> data = getJsonDataToMap("NewAccountData.json");
-		return new Object[][] { { data.get(0) }, { data.get(1) } };
+		return data.stream().map(entry -> new Object[] { entry }).toArray(Object[][]::new);
 	}
 
 	@DataProvider

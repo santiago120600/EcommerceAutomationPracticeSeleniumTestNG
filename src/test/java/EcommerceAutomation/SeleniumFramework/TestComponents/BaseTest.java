@@ -63,19 +63,8 @@ public class BaseTest {
 		driver.get(url);
 	}
 	
-	public void takeScreenShot(){
-		try {
-			TakesScreenshot ts = (TakesScreenshot) driver;
-			File src = ts.getScreenshotAs(OutputType.FILE);
-			FileUtils.copyFile(src, new File("src/main/resources/"+src.getName()));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 	@AfterMethod(alwaysRun = true)
 	public void after() {
-		takeScreenShot();
 		driver.quit();
 	}
 	
@@ -89,6 +78,20 @@ public class BaseTest {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	public String takeScreenShot(String testName, WebDriver driver){
+		String path = "";
+		try {
+			TakesScreenshot ts = (TakesScreenshot) driver;
+			File src = ts.getScreenshotAs(OutputType.FILE);
+			path = "src/main/resources/"+testName+".png";
+			FileUtils.copyFile(src, new File(path));
+			
+		} catch (Exception e) {
+			throw new RuntimeException("Failed to capture screenshot. Error: " + e.getMessage());
+		}
+		return path;
 	}
 
 }
