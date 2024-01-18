@@ -5,13 +5,14 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import EcommerceAutomation.SeleniumFramework.TestComponents.BaseTest;
+import EcommerceAutomation.SeleniumFramework.TestComponents.Retry;
 import EcommerceAutomation.SeleniumFramework.pageObjects.CartPage;
 import EcommerceAutomation.SeleniumFramework.pageObjects.CheckoutPage;
 import EcommerceAutomation.SeleniumFramework.pageObjects.LoginPage;
 import EcommerceAutomation.SeleniumFramework.pageObjects.ShopLandingPage;
 
 public class SubmitOrder extends BaseTest{
-	@Test(priority = 1, dataProvider = "getData")
+	@Test(priority = 1, dataProvider = "getData", retryAnalyzer = Retry.class)
 	public void submitOrderTest(String email, String password, String productName){
 		LoginPage login = new LoginPage(driver);
 		login.doLogin(email,password);

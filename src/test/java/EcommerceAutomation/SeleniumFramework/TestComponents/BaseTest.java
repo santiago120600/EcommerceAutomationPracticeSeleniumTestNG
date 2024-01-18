@@ -15,6 +15,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
@@ -32,7 +33,7 @@ public class BaseTest {
 	}
 
 	@BeforeMethod(alwaysRun = true)
-	public void before() {
+	public void before(ITestContext context) {
 		Properties prop = new Properties();
 		try {
 			FileInputStream fis = new FileInputStream(System.getProperty("user.dir")+"\\src\\test\\java\\EcommerceAutomation\\SeleniumFramework\\resources\\GlobalData.properties");
@@ -54,6 +55,7 @@ public class BaseTest {
 			default:
 				throw new IllegalArgumentException("Unsupported browser: " + browserName);
 			}
+	        context.setAttribute("driver", this.driver);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -85,7 +87,7 @@ public class BaseTest {
 		try {
 			TakesScreenshot ts = (TakesScreenshot) driver;
 			File src = ts.getScreenshotAs(OutputType.FILE);
-			path = "src/main/resources/"+testName+".png";
+			path = System.getProperty("user.dir")+"\\reports\\"+testName+"_"+System.currentTimeMillis()+".png";
 			FileUtils.copyFile(src, new File(path));
 			
 		} catch (Exception e) {
