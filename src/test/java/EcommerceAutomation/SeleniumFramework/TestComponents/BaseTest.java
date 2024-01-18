@@ -38,7 +38,7 @@ public class BaseTest {
 		try {
 			FileInputStream fis = new FileInputStream(System.getProperty("user.dir")+"\\src\\test\\java\\EcommerceAutomation\\SeleniumFramework\\resources\\GlobalData.properties");
 			prop.load(fis);
-			String browserName = prop.getProperty("browser");
+			String browserName = System.getProperty("browser")!=null ? System.getProperty("browser") : prop.getProperty("browser");		
 			switch (browserName.toLowerCase()) {
 			case "chrome":
 				WebDriverManager.chromedriver().setup();

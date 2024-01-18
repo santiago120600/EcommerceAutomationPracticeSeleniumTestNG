@@ -8,11 +8,12 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import EcommerceAutomation.SeleniumFramework.TestComponents.BaseTest;
+import EcommerceAutomation.SeleniumFramework.TestComponents.Retry;
 import EcommerceAutomation.SeleniumFramework.pageObjects.CreateAccountPage;
 import EcommerceAutomation.SeleniumFramework.pageObjects.LoginPage;
 
 public class CreateAccount extends BaseTest {
-	@Test(dataProvider = "newSuccessfullAccountData", priority = 1, enabled = false)
+	@Test(dataProvider = "newSuccessfullAccountData", priority = 1)
 	public void createNewAccountSuccessfully(HashMap<String, String> input) {
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.clickRegisterLink();
@@ -22,7 +23,7 @@ public class CreateAccount extends BaseTest {
 		Assert.assertEquals(accountPage.getToastMsg(), "Registered Successfully");
 	}
 
-	@Test(dataProvider = "existingAccountData")
+	@Test(dataProvider = "existingAccountData", retryAnalyzer = Retry.class)
 	public void verifyErrorOnCreateAccountForExistingEmail(HashMap<String, String> input) {
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.clickRegisterLink();
@@ -34,7 +35,7 @@ public class CreateAccount extends BaseTest {
 
 	// validate inputs
 	// validate password[min lenght, 1 uppercase, 1 lowercase, 1 special chart ]
-	@Test(dataProvider = "shortPasswordData", enabled = false)
+	@Test(dataProvider = "shortPasswordData", retryAnalyzer = Retry.class)
 	public void validateErrorOnCreateAccountForShortPassword(String firstName, String lastName, String email,
 			String phone, String occupation, String password) {
 		LoginPage loginPage = new LoginPage(driver);
